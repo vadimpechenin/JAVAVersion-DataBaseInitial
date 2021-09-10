@@ -16,6 +16,7 @@ handler= MainHandler()
 #Параметры для обработчиков событий
 from handlers.generateProjects.generateProjectsCommandHandlerParameter import GenerateProjectsCommandHandlerParameter
 from handlers.generateBladeTypes.generateBladeTypesHandlerParameter import GenerateBladeTypesCommandHandlerParameter
+from handlers.generateBlades.generateBladesCommandHandlerParameter import GenerateMeasureCommandHandlerParameter
 
 nameOfDatabase = appSettings.getValue(appSettings.nameOfDatabase)
 
@@ -46,6 +47,8 @@ for number in range(projectsNumber):
                                                              bladeTypesID, bladeTypesName, bladeTypesNumberBladeDisk)
         initInTable = handler.initFunction(1, parameters)
         print(initInTable)
+
+    # Заполнение таблицы Blades
 
 #data_base.init_repletion_data_base()
 """

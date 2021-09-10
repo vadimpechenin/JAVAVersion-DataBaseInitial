@@ -1,5 +1,7 @@
 from handlers.baseCommandHandler import BaseCommandHandler
 from db.mainSQL import SQLDataBase
+from db.blades import Blades
+import numpy as np
 
 class GenerateBladesCommandHandler(BaseCommandHandler):
     def __init__(self):
@@ -9,11 +11,16 @@ class GenerateBladesCommandHandler(BaseCommandHandler):
         # Запрос к базе данных на заполнение данных
         data_base = SQLDataBase(parameters.name_of_database)
         data_base.create_session()
-        data_base.request_delete_of_measured(parameters.name_of_table_meas)
-        data_base.request_delete_of_measured(parameters.name_of_table_num)
-        data_base.generated_data_save_data_base(parameters.delta_thickness, parameters.delta_angle)
-        ciphers = data_base.select_all_params_in_table(parameters.name_of_table_meas)
-        numbers = data_base.select_one_params_in_table(parameters.name_of_table_num, parameters.name_of_column_num)
-        responce_dict={'meas':ciphers, 'number':numbers}
+        thiknessMeausred = np.random.normal(parameters.thickess+(parameters.TThickness[1] + parameters.TThickness[0]) / 2,
+                                        (parameters.TThickness[1] - parameters.TThickness[0]) / 6,
+                                        parameters.numberBladeDisk)
+        anglesMeausred = np.random.normal(parameters.angle+(parameters.TAngle[1] + parameters.TAngle[0]) / 2,
+                                        (parameters.TAngle[1] - parameters.TAngle[0]) / 6,
+                                        parameters.numberBladeDisk)
+        for j in range(parameters.numberBladeDisk):
+            type_object = Blades(ID=str(parameters.ID), Name=parameters.name, NumberBladesDisk=parameters.numberBladeDisk)
+            data_base.databaseAddCommit(type_object)
 
-        return responce_dict
+        ciphers = data_base.select_all_params_in_table(parameters.nameOfTable)
+
+        return ciphers
