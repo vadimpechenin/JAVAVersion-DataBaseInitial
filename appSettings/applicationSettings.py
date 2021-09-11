@@ -54,6 +54,21 @@ class ApplicationSettings():
     bladeTypesNameName = 'bladeTypesName'
     bladeTypesNumberBladeDiskName = 'bladeTypesNumberBladeDisk'
 
+    # Параметры для сущности Blades
+    bladesNameOfTable = 'Blades'
+    bladesIDName = 'bladesID'
+    bladesExternalIDName = 'bladesExternalIDName'
+
+    # Параметры для сущности ParameterDescriptions
+    parameterDescriprionsNameOfTable = 'ParameterDescriprions'
+    parameterDescriprionsIDName = 'parameterDescriprionsID'
+    parameterDescriprionsSystemNameName = 'parameterDescriprionsSystemName'
+    parameterDescriprionsDisplayNameName = 'parameterDescriprionsDisplayName'
+
+    # Параметры для сущности ParameterValues
+    parameterValuesNameOfTable = 'ParameterValues'
+    parameterValuesIDName = 'parameterValuesID'
+    parameterValuesValueName = 'parameterValuesValueName'
     values = {}
 
     def __init__(self):
@@ -98,6 +113,54 @@ class ApplicationSettings():
         self.values[self.bladeTypesIDName] = 1
         self.values[self.bladeTypesNameName] = 'Лопатка 8 ступени'
         self.values[self.bladeTypesNumberBladeDiskName] = 84
+
+        # Параметры для сущности Blades
+        self.values[self.bladesNameOfTable] = 'Blades'
+        self.values[self.bladesIDName] = 1
+        self.values[self.bladesExternalIDName] = 1
+
+        # Параметры для сущности ParameterDescriprions
+        self.values[self.parameterDescriprionsNameOfTable] = 'ParameterDescriptions'
+        self.values[self.parameterDescriprionsIDName] = 1
+        self.values[self.parameterDescriprionsSystemNameName] = ['T_thickness_lower',
+                                                                 'T_thickness_upper',
+                                                                 'T_angle_lower',
+                                                                 'T_angle_upper',
+                                                                 'thickness',
+                                                                 'thickness_T',
+                                                                 'thickness_B',
+                                                                 'thickness_T_nom',
+                                                                 'thickness_B_nom','angle','shelf_width_T','shelf_width_half_T',
+                                                                 'T_shelf_width_half_T_lower','T_shelf_width_half_T_upper',
+                                                                 'shelf_width_B','shelf_width_half_B',
+                                                                 'T_shelf_width_half_B_lower','T_shelf_width_half_B_upper',
+                                                                 'angle_slice','slice_B','slice_T']
+        self.values[self.parameterDescriprionsDisplayNameName] = ['Допуск на толщину нижний','Допуск на толщину верхний',
+                                                                  'Допуск на угол нижний', 'Допуск на угол верхний',
+                                                                  'Номинальное значение толщины, обеспечивающее натяг',
+                                                                  'толщина до точки вращения со стороны корыта',
+                                                                  'толщина до точки вращения со стороны спинки',
+                                                                  'Номинальное значение толщины, обеспечивающее натяг с корыта',
+                                                                  'Номинальное значение толщины, обеспечивающее натяг со спинки',
+                                                                  'Угол антивибрационной полки','Толщина полки со стороны корыта',
+                                                                  'Половина толщины полки со стороны корыта',
+                                                                  'Половина допуска на толщину полки со стороны корыта нижнее',
+                                                                  'Половина допуска на толщину полки со стороны корыта верхнее',
+                                                                  'Толщина полки со стороны спинки',
+                                                                  'Половина толщины полки со стороны спинки',
+                                                                  'Половина допуска на толщину полки со стороны спинки нижнее',
+                                                                  'Половина допуска на толщину полки со стороны спинки верхнее',
+                                                                  'Угол для срезов лопаток',
+                                                                  'Расстояния до срезов лопаток со стороны спинки',
+                                                                  'Расстояния до срезов лопаток со стороны корыта']
+        # Параметры для сущности ParameterValues
+        self.values[self.parameterValuesNameOfTable] = 'parameterValues'
+        self.values[self.parameterValuesIDName] = 1
+        self.values[self.parameterValuesValueName] = [-0.1, 0.15, -1 / 6 / 180 * math.pi, 1 / 6 / 180 * math.pi,
+                                                        25.13, 11.1, 25.13 -11.1, 11.1 * 24.73 / 25.13,
+                                                        24.73 -11.1 * 24.73 / 25.13, 30 / 180 * math.pi,
+                                                        11.75, 6, -0.1, 0.1, 11.5,6.8,-0.1, 0.1,
+                                                        50 / 180 * math.pi, 16.05, 12.7]
 
     def getNames(self):
         #Возвращает все названия параметров, необходимых для приложения

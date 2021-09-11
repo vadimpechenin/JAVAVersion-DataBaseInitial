@@ -5,6 +5,8 @@
 from handlers.generateProjects.generateProjectsCommandHandler import GenerateProjectsCommandHandler
 from handlers.generateBladeTypes.generateBladeTypesHandler import GenerateBladeTypesCommandHandler
 from handlers.generateBlades.generateBladesCommandHandler import GenerateBladesCommandHandler
+from handlers.parameterDescriptions.parameterDescriptionsСommandHandler import ParameterDescriptionsСommandHandler
+from handlers.parameterValues.parameterValuesСommandHandler import ParameterValuesСommandHandler
 
 class MainHandler():
     def __init__(self):
@@ -12,6 +14,8 @@ class MainHandler():
         self.dict[0] = GenerateProjectsCommandHandler()
         self.dict[1] = GenerateBladeTypesCommandHandler()
         self.dict[2] = GenerateBladesCommandHandler()
+        self.dict[3] = ParameterDescriptionsСommandHandler()
+        self.dict[4] = ParameterValuesСommandHandler()
 
     def initFunction(self,code_request, parameter):
         result = None

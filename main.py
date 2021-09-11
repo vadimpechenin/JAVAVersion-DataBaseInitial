@@ -1,8 +1,6 @@
 """
 Тестовая программа для создания и наполнения базы данных
 """
-import numpy as np
-
 from db.mainSQL import SQLDataBase
 
 #Основные параметры для заполнения
@@ -17,6 +15,8 @@ handler= MainHandler()
 from handlers.generateProjects.generateProjectsCommandHandlerParameter import GenerateProjectsCommandHandlerParameter
 from handlers.generateBladeTypes.generateBladeTypesHandlerParameter import GenerateBladeTypesCommandHandlerParameter
 from handlers.generateBlades.generateBladesCommandHandlerParameter import GenerateMeasureCommandHandlerParameter
+from handlers.parameterDescriptions.parameterDescriptionsСommandHandlerParameter import ParameterDescriptionsСommandHandlerParameter
+from handlers.parameterValues.parameterValuesСommandHandlerParameter import ParameterValuesСommandHandlerParameter
 
 nameOfDatabase = appSettings.getValue(appSettings.nameOfDatabase)
 
@@ -36,7 +36,7 @@ for number in range(projectsNumber):
     parameters = GenerateProjectsCommandHandlerParameter(nameOfDatabase, NameOfTable, projectsID, DescriptionName)
     initInTable = handler.initFunction(0, parameters)
     print(initInTable)
-    appSettings.setValue(appSettings.projectsIDName, projectsID + 1)
+
     # Заполнение таблицы BladeTypes
     if (number==0):
         NameOfTable = appSettings.getValue(appSettings.bladeTypesNameOfTable)
@@ -46,10 +46,55 @@ for number in range(projectsNumber):
         parameters = GenerateBladeTypesCommandHandlerParameter(nameOfDatabase, NameOfTable,
                                                              bladeTypesID, bladeTypesName, bladeTypesNumberBladeDisk)
         initInTable = handler.initFunction(1, parameters)
+        #appSettings.setValue(appSettings.bladeTypesIDName,
+        #                     bladeTypesID + 1)
         print(initInTable)
 
     # Заполнение таблицы Blades
+    NameOfTable = appSettings.getValue(appSettings.bladesNameOfTable)
+    bladesID = appSettings.getValue(appSettings.bladesIDName)
+    thickess = appSettings.getValue(appSettings.thickness_name)
+    TThickness = appSettings.getValue(appSettings.T_thickness_name)
+    angle = appSettings.getValue(appSettings.angle_name)
+    TAngle = appSettings.getValue(appSettings.T_angle_name)
+    externalID = appSettings.getValue(appSettings.bladesExternalIDName)
 
+    parameters = GenerateMeasureCommandHandlerParameter(nameOfDatabase, NameOfTable, bladesID, thickess,
+                                                        TThickness, angle, TAngle, bladeTypesNumberBladeDisk,
+                                                        projectsID, externalID, bladeTypesID)
+
+    appSettings.setValue(appSettings.bladesIDName, bladesID + bladeTypesNumberBladeDisk)
+    initInTable = handler.initFunction(2, parameters)
+    print(initInTable)
+
+    # Заполнение таблицы ParameterDescriptions
+    if (number == 0):
+        NameOfTable = appSettings.getValue(appSettings.parameterDescriprionsNameOfTable)
+        parameterDescriprionsID = appSettings.getValue(appSettings.parameterDescriprionsIDName)
+        parameterDescriprionsSystemName= appSettings.getValue(appSettings.parameterDescriprionsSystemNameName)
+        parameterDescriprionsDisplayName = appSettings.getValue(appSettings.parameterDescriprionsDisplayNameName)
+
+        parameters = ParameterDescriptionsСommandHandlerParameter(nameOfDatabase, NameOfTable, parameterDescriprionsID,
+                                                                  parameterDescriprionsSystemName,
+                                                                  parameterDescriprionsDisplayName)
+        initInTable = handler.initFunction(3, parameters)
+        print(initInTable)
+
+        # Заполнение таблицы ParameterValues
+        NameOfTable = appSettings.getValue(appSettings.parameterValuesNameOfTable)
+        parameterValuesID = appSettings.getValue(appSettings.parameterValuesIDName)
+        parameterValuesValue= appSettings.getValue(appSettings.parameterValuesValueName)
+        parameters = ParameterValuesСommandHandlerParameter(nameOfDatabase, NameOfTable, parameterValuesID,
+                                                                  bladeTypesID, parameterDescriprionsID,
+                                                                  parameterValuesValue)
+        initInTable = handler.initFunction(4, parameters)
+        print(initInTable)
+        #Увеличение ID для параметров
+        appSettings.setValue(appSettings.parameterDescriprionsIDName,
+                             parameterDescriprionsID + len(parameterDescriprionsSystemName))
+        appSettings.setValue(appSettings.parameterValuesIDName, parameterValuesID + len(parameterValuesValue))
+
+    appSettings.setValue(appSettings.projectsIDName, projectsID + 1)
 #data_base.init_repletion_data_base()
 """
 N = 84
