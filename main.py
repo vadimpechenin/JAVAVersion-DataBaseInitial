@@ -17,6 +17,8 @@ from handlers.generateBladeTypes.generateBladeTypesHandlerParameter import Gener
 from handlers.generateBlades.generateBladesCommandHandlerParameter import GenerateMeasureCommandHandlerParameter
 from handlers.parameterDescriptions.parameterDescriptionsСommandHandlerParameter import ParameterDescriptionsСommandHandlerParameter
 from handlers.parameterValues.parameterValuesСommandHandlerParameter import ParameterValuesСommandHandlerParameter
+from handlers.generateDisplacements.generateDisplacementsCommandHandlerParameter import GenerateDisplacementsCommandHandlerParameter
+from handlers.generateDisplacementContents.generateDisplacementContentsCommandHandlerParameter import GenerateDisplacementContentsCommandHandlerParameter
 
 nameOfDatabase = appSettings.getValue(appSettings.nameOfDatabase)
 
@@ -63,12 +65,11 @@ for number in range(projectsNumber):
                                                         TThickness, angle, TAngle, bladeTypesNumberBladeDisk,
                                                         projectsID, externalID, bladeTypesID)
 
-    appSettings.setValue(appSettings.bladesIDName, bladesID + bladeTypesNumberBladeDisk)
     initInTable = handler.initFunction(2, parameters)
     print(initInTable)
 
-    # Заполнение таблицы ParameterDescriptions
     if (number == 0):
+        # Заполнение таблицы ParameterDescriptions
         NameOfTable = appSettings.getValue(appSettings.parameterDescriprionsNameOfTable)
         parameterDescriprionsID = appSettings.getValue(appSettings.parameterDescriprionsIDName)
         parameterDescriprionsSystemName= appSettings.getValue(appSettings.parameterDescriprionsSystemNameName)
@@ -94,20 +95,30 @@ for number in range(projectsNumber):
                              parameterDescriprionsID + len(parameterDescriprionsSystemName))
         appSettings.setValue(appSettings.parameterValuesIDName, parameterValuesID + len(parameterValuesValue))
 
-    appSettings.setValue(appSettings.projectsIDName, projectsID + 1)
-#data_base.init_repletion_data_base()
-"""
-N = 84
-T_thickness_lower = -0.1
-T_thickness_upper = 0.15
-delta_thickness = np.random.normal((T_thickness_upper+T_thickness_lower)/2,(T_thickness_upper-T_thickness_lower)/6,
-                 size = N)
-T_angle_lower = -1/6/180*np.pi
-T_angle_upper = 1/6/180*np.pi
-delta_angle = np.random.normal((T_angle_upper + T_angle_lower)/2,
-                                                   (T_angle_upper - T_angle_lower)/6, size = N)
+    # Заполнение таблицы Displacements
+    NameOfTable = appSettings.getValue(appSettings.displacementNameOfTable)
+    displacementID= appSettings.getValue(appSettings.displacementIDName)
+    displacementType = appSettings.getValue(appSettings.displacementDisplacementTypeName)
+    parameters = GenerateDisplacementsCommandHandlerParameter(nameOfDatabase, NameOfTable, displacementID,
+                                                              projectsID,
+                                                              displacementType)
+    initInTable = handler.initFunction(5, parameters)
+    print(initInTable)
 
-data_base.generated_data_save_data_base(delta_thickness,delta_angle)
-"""
+    # Заполнение таблицы DisplacementContents
+    NameOfTable = appSettings.getValue(appSettings.displacementContentsNameOfTable)
+    displacementContentsID = appSettings.getValue(appSettings.displacementContentsIDName)
+    displacementContentsPosition= appSettings.getValue(appSettings.displacementContentsPositionName)
+    parameters = GenerateDisplacementContentsCommandHandlerParameter(nameOfDatabase, NameOfTable, displacementContentsID,
+                                                              displacementID,
+                                                              bladesID, displacementContentsPosition)
+    initInTable = handler.initFunction(6, parameters)
+    print(initInTable)
+
+    appSettings.setValue(appSettings.displacementContentsIDName, displacementContentsID + bladeTypesNumberBladeDisk)
+    appSettings.setValue(appSettings.displacementIDName, displacementID + 1)
+    appSettings.setValue(appSettings.bladesIDName, bladesID + bladeTypesNumberBladeDisk)
+    appSettings.setValue(appSettings.projectsIDName, projectsID + 1)
+
 
 

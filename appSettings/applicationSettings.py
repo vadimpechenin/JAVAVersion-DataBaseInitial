@@ -69,6 +69,17 @@ class ApplicationSettings():
     parameterValuesNameOfTable = 'ParameterValues'
     parameterValuesIDName = 'parameterValuesID'
     parameterValuesValueName = 'parameterValuesValueName'
+
+    # Параметры для сущности Displacements
+    displacementNameOfTable = 'Displacements'
+    displacementIDName = 'displacementValuesID'
+    displacementDisplacementTypeName = 'displacementDisplacementType'
+
+    # Параметры для сущности DisplacementContents
+    displacementContentsNameOfTable = 'DisplacementContents'
+    displacementContentsIDName = 'displacementContentsID'
+    displacementContentsPositionName = 'displacementContentsPosition'
+
     values = {}
 
     def __init__(self):
@@ -161,6 +172,15 @@ class ApplicationSettings():
                                                         24.73 -11.1 * 24.73 / 25.13, 30 / 180 * math.pi,
                                                         11.75, 6, -0.1, 0.1, 11.5,6.8,-0.1, 0.1,
                                                         50 / 180 * math.pi, 16.05, 12.7]
+        # Параметры для сущности Displacements
+        self.values[self.displacementNameOfTable] = 'Displacements'
+        self.values[self.displacementIDName] = 1
+        self.values[self.displacementDisplacementTypeName] = 0
+
+        # Параметры для сущности DisplacementContents
+        self.values[self.displacementContentsNameOfTable] = 'DisplacementContents'
+        self.values[self.displacementContentsIDName] = 1
+        self.values[self.displacementContentsPositionName] = [i + 1 for i in range(self.values[self.number_of_blades_name])]
 
     def getNames(self):
         #Возвращает все названия параметров, необходимых для приложения
