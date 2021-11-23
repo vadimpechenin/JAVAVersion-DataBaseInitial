@@ -1,17 +1,17 @@
 from handlers.baseCommandHandler import BaseCommandHandler
 from db.mainSQL import SQLDataBase
-from db.parameterValues import ParameterValues
+from db.parameterDiskValues import ParameterDiskValues
 
-class ParameterValuesСommandHandler(BaseCommandHandler):
+class ParameterDiskValuesСommandHandler(BaseCommandHandler):
     def __init__(self):
         pass
 
     def execute(self, parameters):
         data_base = SQLDataBase(parameters.nameOfDatabase)
         data_base.create_session()
-        for j in range(21): #len(parameters.value)
+        for j in range(21, len(parameters.value)):
 
-            type_object = ParameterValues(ID=str(parameters.ID), BladeTypeID=str(parameters.bladeTypeID),
+            type_object = ParameterDiskValues(ID=str(parameters.ID), BladeTypeID=str(parameters.diskTypeID),
                                           ParameterDescriptionID = str(parameters.parameterDescriptionID),
                                           Value=parameters.value[j])
             parameters.ID += 1

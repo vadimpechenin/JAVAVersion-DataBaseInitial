@@ -20,6 +20,9 @@ from handlers.parameterValues.parameterValuesСommandHandlerParameter import Par
 from handlers.generateDisplacements.generateDisplacementsCommandHandlerParameter import GenerateDisplacementsCommandHandlerParameter
 from handlers.generateDisplacementContents.generateDisplacementContentsCommandHandlerParameter import GenerateDisplacementContentsCommandHandlerParameter
 
+from handlers.generateDiskTypes.generateDiskTypesHandlerParameter import GenerateDiskTypesCommandHandlerParameter
+from handlers.parameterDiskValues.generateParameterDiskValuesCommandHandlerParameter import ParameterDiskValuesСommandHandlerParameter
+
 nameOfDatabase = appSettings.getValue(appSettings.nameOfDatabase)
 
 data_base = SQLDataBase(nameOfDatabase)
@@ -38,21 +41,32 @@ for number in range(projectsNumber):
     parameters = GenerateProjectsCommandHandlerParameter(nameOfDatabase, NameOfTable, projectsID, DescriptionName)
     initInTable = handler.initFunction(0, parameters)
     print(initInTable)
+    # Заполнение таблицы DiskTypes
+    if (number == 0):
+        NameOfTable = appSettings.getValue(appSettings.diskTypesNameOfTable)
+        diskTypesID = appSettings.getValue(appSettings.diskTypesIDName)
+        diskTypesName = appSettings.getValue(appSettings.diskTypesNameName)
+        diskTypesNumberBladeDisk = appSettings.getValue(appSettings.diskTypesNumberBladeDiskName)
+        parameters = GenerateDiskTypesCommandHandlerParameter(nameOfDatabase, NameOfTable,
+                                                               diskTypesID, diskTypesName, diskTypesNumberBladeDisk)
+        initInTable = handler.initFunction(7, parameters)
+
+        print(initInTable)
 
     # Заполнение таблицы BladeTypes
-    if (number==0):
+
         NameOfTable = appSettings.getValue(appSettings.bladeTypesNameOfTable)
         bladeTypesID = appSettings.getValue(appSettings.bladeTypesIDName)
         bladeTypesName = appSettings.getValue(appSettings.bladeTypesNameName)
-        bladeTypesNumberBladeDisk= appSettings.getValue(appSettings.bladeTypesNumberBladeDiskName)
+        #bladeTypesNumberBladeDisk= appSettings.getValue(appSettings.bladeTypesNumberBladeDiskName)
         parameters = GenerateBladeTypesCommandHandlerParameter(nameOfDatabase, NameOfTable,
-                                                             bladeTypesID, bladeTypesName, bladeTypesNumberBladeDisk)
+                                                             bladeTypesID, bladeTypesName, diskTypesID)
         initInTable = handler.initFunction(1, parameters)
         #appSettings.setValue(appSettings.bladeTypesIDName,
         #                     bladeTypesID + 1)
         print(initInTable)
 
-    # Заполнение таблицы Blades
+    # Заполнение таблицы Blades.
     NameOfTable = appSettings.getValue(appSettings.bladesNameOfTable)
     bladesID = appSettings.getValue(appSettings.bladesIDName)
     thickess = appSettings.getValue(appSettings.thickness_name)

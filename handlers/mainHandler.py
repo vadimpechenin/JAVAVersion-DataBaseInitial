@@ -10,6 +10,9 @@ from handlers.parameterValues.parameterValuesСommandHandler import ParameterVal
 from handlers.generateDisplacements.generateDisplacementsCommandHandler import GenerateDisplacementsCommandHandler
 from handlers.generateDisplacementContents.generateDisplacementContentsCommandHandler import GenerateDisplacementContentsCommandHandler
 
+from handlers.generateDiskTypes.generateDiskTypesHandler import GenerateDiskTypesCommandHandler
+from handlers.parameterDiskValues.generateParameterDiskValuesCommandHandler import ParameterDiskValuesСommandHandler
+
 class MainHandler():
     def __init__(self):
         self.dict = {}
@@ -20,6 +23,9 @@ class MainHandler():
         self.dict[4] = ParameterValuesСommandHandler()
         self.dict[5] = GenerateDisplacementsCommandHandler()
         self.dict[6] = GenerateDisplacementContentsCommandHandler()
+
+        self.dict[7] = GenerateDiskTypesCommandHandler()
+        self.dict[8] = ParameterDiskValuesСommandHandler()
 
     def initFunction(self,code_request, parameter):
         result = None

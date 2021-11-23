@@ -27,6 +27,22 @@ class ApplicationSettings():
     angle_slice_name = 'angle_slice'
     slice_B_name = 'slice_B'
     slice_T_name = 'slice_T'
+
+
+    # Параметры диска. ноябрь 2021
+    # Толщина паза диска
+    thicknessSlot_name = 'thicknessSlot' #Номинальная толщина паза
+    TthicknessSlot_name = 'TthicknessSlot' #Допуск на толщину паза
+    deltaThicknessSlot_name = 'deltaThicknessSlot' #Отклонение толщины паза
+    #Угол разворота паза относительно оси
+    angleAxisSlot_name = 'angleAxisSlot' #Номинальный угол
+    TAngleAxisSlot_name = 'TAngleAxisSlot' #Допуск на угол установки
+    deltaAngleAxisSlot_name = 'deltaAngleAxisSlot' #Отклонение угла
+    #Угол расположения паза в радиальном направлении
+    angleSlot_name = 'angleSlot' #Номинальный угол 360/84
+    TAngleSlot_name = 'TAngleSlot' #Допуск на толщин
+    deltaAngleSlot_name = 'deltaAngleSlot' #Отклонение угла
+
     # Название файда базы данных
     filedb_name = 'filedb'
     # Производные параметры
@@ -52,7 +68,7 @@ class ApplicationSettings():
     bladeTypesNameOfTable = 'BladeTypes'
     bladeTypesIDName = 'bladeTypesID'
     bladeTypesNameName = 'bladeTypesName'
-    bladeTypesNumberBladeDiskName = 'bladeTypesNumberBladeDisk'
+    #bladeTypesNumberBladeDiskName = 'bladeTypesNumberBladeDisk'
 
     # Параметры для сущности Blades
     bladesNameOfTable = 'Blades'
@@ -79,6 +95,26 @@ class ApplicationSettings():
     displacementContentsNameOfTable = 'DisplacementContents'
     displacementContentsIDName = 'displacementContentsID'
     displacementContentsPositionName = 'displacementContentsPosition'
+
+    #Сущности для диска. Ноябрь 2021
+    # Параметры для сущности DiskTypes
+    diskTypesNameOfTable = 'DiskTypes'
+    diskTypesIDName = 'diskTypesID'
+    diskTypesNameName = 'diskTypesName'
+    diskTypesNumberBladeDiskName = 'bladeTypesNumberBladeDisk'
+
+    # Параметры для сущности Disks
+    diskNameOfTable = 'Disks'
+    diskIDName = 'disksID'
+
+    # Параметры для сущности Slots
+    slotNameOfTable = 'Slots'
+    slotIDName = 'slotsID'
+
+    # Параметры для сущности ParameterDiskValues
+    parameterDiskValuesNameOfTable = 'ParameterDiskValues'
+    parameterDiskValuesIDName = 'parameterDiskValuesID'
+    parameterDiskValuesValueName = 'parameterDiskValuesValueName'
 
     values = {}
 
@@ -113,17 +149,29 @@ class ApplicationSettings():
         self.values[self.assemblyChord_name] = None
         self.values[self.assemblyGaps_name] = None
         self.values[self.assemblyGaps_init_name] = None
+        # Толщина паза диска
+        self.values[self.thicknessSlot_name] = 13.316
+        self.values[self.TthicknessSlot_name] = 0.06
+        self.values[self.deltaThicknessSlot_name] = None
+        self.values[self.angleAxisSlot_name] = 24/180*math.pi
+        self.values[self.TAngleAxisSlot_name] = 5/60/180*math.pi
+        self.values[self.deltaAngleAxisSlot_name] = None
+        self.values[self.angleSlot_name] = 360/84/180*math.pi
+        self.values[self.TAngleSlot_name] = 5/60/180*math.pi
+        self.values[self.deltaAngleSlot_name] = None
 
-        self.values[self.nameOfDatabase] = 'set_of_blades1.db'
+
+        self.values[self.nameOfDatabase] = 'set_of_blades2.db'
         self.values[self.projectsNameOfTable] = 'Projects'
         self.values[self.projectsIDName] = 1
         self.values[self.projectsDescriptionName] = 'projectsDescription'
         self.values[self.nameOfProjectsNumber] = 2
 
+        # Параметры для сущности BladesTypes
         self.values[self.bladeTypesNameOfTable] = 'BladeTypes'
         self.values[self.bladeTypesIDName] = 1
         self.values[self.bladeTypesNameName] = 'Лопатка 8 ступени'
-        self.values[self.bladeTypesNumberBladeDiskName] = 84
+        #self.values[self.bladeTypesNumberBladeDiskName] = 84
 
         # Параметры для сущности Blades
         self.values[self.bladesNameOfTable] = 'Blades'
@@ -145,7 +193,10 @@ class ApplicationSettings():
                                                                  'T_shelf_width_half_T_lower','T_shelf_width_half_T_upper',
                                                                  'shelf_width_B','shelf_width_half_B',
                                                                  'T_shelf_width_half_B_lower','T_shelf_width_half_B_upper',
-                                                                 'angle_slice','slice_B','slice_T']
+                                                                 'angle_slice','slice_B','slice_T',
+                                                                 'thickness_slot','thickness_slot_upper','thickness_slot_lower',
+                                                                 'angle_axis_slot','angle_axis_slot_upper','angle_axis_slot_lower',
+                                                                 'angle_slot','angle_slot_upper','angle_slot_lower']
         self.values[self.parameterDescriprionsDisplayNameName] = ['Допуск на толщину нижний','Допуск на толщину верхний',
                                                                   'Допуск на угол нижний', 'Допуск на угол верхний',
                                                                   'Номинальное значение толщины, обеспечивающее натяг',
@@ -163,7 +214,17 @@ class ApplicationSettings():
                                                                   'Половина допуска на толщину полки со стороны спинки верхнее',
                                                                   'Угол для срезов лопаток',
                                                                   'Расстояния до срезов лопаток со стороны спинки',
-                                                                  'Расстояния до срезов лопаток со стороны корыта']
+                                                                  'Расстояния до срезов лопаток со стороны корыта',
+                                                                  'Толщина паза в диске',
+                                                                  'Допуск на толщину паза нижнее',
+                                                                  'Допуск на толщину паза верхнее',
+                                                                  'Угол наклона паза',
+                                                                  'Допуск на угол наклона паза нижнее',
+                                                                  'Допуск на угол наклона паза верхнее',
+                                                                  'Угол паза',
+                                                                  'Допуск на угол паза нижнее',
+                                                                  'Допуск на угол паза верхнее'
+                                                                  ]
         # Параметры для сущности ParameterValues
         self.values[self.parameterValuesNameOfTable] = 'parameterValues'
         self.values[self.parameterValuesIDName] = 1
@@ -171,7 +232,12 @@ class ApplicationSettings():
                                                         25.13, 11.1, 25.13 -11.1, 11.1 * 24.73 / 25.13,
                                                         24.73 -11.1 * 24.73 / 25.13, 30 / 180 * math.pi,
                                                         11.75, 6, -0.1, 0.1, 11.5,6.8,-0.1, 0.1,
-                                                        50 / 180 * math.pi, 16.05, 12.7]
+                                                        50 / 180 * math.pi, 16.05, 12.7,
+                                                      13.316, 0.06,-0.12,24 / 180 * math.pi,5 / 60 / 180 * math.pi,
+                                                      -5 / 60 / 180 * math.pi,360 / 84 / 180 * math.pi,
+                                                      5 / 60 / 180 * math.pi, -5 / 60 / 180 * math.pi
+                                                      ]
+
         # Параметры для сущности Displacements
         self.values[self.displacementNameOfTable] = 'Displacements'
         self.values[self.displacementIDName] = 1
@@ -181,6 +247,30 @@ class ApplicationSettings():
         self.values[self.displacementContentsNameOfTable] = 'DisplacementContents'
         self.values[self.displacementContentsIDName] = 1
         self.values[self.displacementContentsPositionName] = [i + 1 for i in range(self.values[self.number_of_blades_name])]
+
+        # Параметры для сущности DiskTypes
+        self.values[self.diskTypesNameOfTable] = 'DiskTypes'
+        self.values[self.diskTypesIDName] = 1
+        self.values[self.diskTypesNameName] = 'Диск 8 ступени'
+        self.values[self.diskTypesNumberBladeDiskName] = 84
+
+        # Параметры для сущности Disks
+        self.values[self.diskNameOfTable] = 'Disks'
+        self.values[self.diskIDName] = 1
+
+        # Параметры для сущности Slots
+        self.values[self.slotNameOfTable] = 'Slots'
+        self.values[self.slotIDName] = 1
+
+        # Параметры для сущности ParameterDiskValues
+        self.values[self.parameterDiskValuesNameOfTable] = 'parameterDiskValues'
+        self.values[self.parameterDiskValuesIDName] = 1
+        self.values[self.parameterDiskValuesValueName] = [-0.1, 0.15, -1 / 6 / 180 * math.pi, 1 / 6 / 180 * math.pi,
+                                                        25.13, 11.1, 25.13 -11.1, 11.1 * 24.73 / 25.13,
+                                                        24.73 -11.1 * 24.73 / 25.13, 30 / 180 * math.pi,
+                                                        11.75, 6, -0.1, 0.1, 11.5,6.8,-0.1, 0.1,
+                                                        50 / 180 * math.pi, 16.05, 12.7]
+
 
     def getNames(self):
         #Возвращает все названия параметров, необходимых для приложения
