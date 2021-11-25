@@ -229,13 +229,10 @@ class ApplicationSettings():
         self.values[self.parameterValuesNameOfTable] = 'parameterValues'
         self.values[self.parameterValuesIDName] = 1
         self.values[self.parameterValuesValueName] = [-0.1, 0.15, -1 / 6 / 180 * math.pi, 1 / 6 / 180 * math.pi,
-                                                        25.13, 11.1, 25.13 -11.1, 11.1 * 24.73 / 25.13,
+                                                        25.13, 11.1, 25.13 - 11.1, 11.1 * 24.73 / 25.13,
                                                         24.73 -11.1 * 24.73 / 25.13, 30 / 180 * math.pi,
                                                         11.75, 6, -0.1, 0.1, 11.5,6.8,-0.1, 0.1,
-                                                        50 / 180 * math.pi, 16.05, 12.7,
-                                                      13.316, 0.06,-0.12,24 / 180 * math.pi,5 / 60 / 180 * math.pi,
-                                                      -5 / 60 / 180 * math.pi,360 / 84 / 180 * math.pi,
-                                                      5 / 60 / 180 * math.pi, -5 / 60 / 180 * math.pi
+                                                        50 / 180 * math.pi, 16.05, 12.7
                                                       ]
 
         # Параметры для сущности Displacements
@@ -265,11 +262,9 @@ class ApplicationSettings():
         # Параметры для сущности ParameterDiskValues
         self.values[self.parameterDiskValuesNameOfTable] = 'parameterDiskValues'
         self.values[self.parameterDiskValuesIDName] = 1
-        self.values[self.parameterDiskValuesValueName] = [-0.1, 0.15, -1 / 6 / 180 * math.pi, 1 / 6 / 180 * math.pi,
-                                                        25.13, 11.1, 25.13 -11.1, 11.1 * 24.73 / 25.13,
-                                                        24.73 -11.1 * 24.73 / 25.13, 30 / 180 * math.pi,
-                                                        11.75, 6, -0.1, 0.1, 11.5,6.8,-0.1, 0.1,
-                                                        50 / 180 * math.pi, 16.05, 12.7]
+        self.values[self.parameterDiskValuesValueName] = [13.316, 0.06,-0.12,24 / 180 * math.pi,5 / 60 / 180 * math.pi,
+                                                      -5 / 60 / 180 * math.pi,360 / 84 / 180 * math.pi,
+                                                      5 / 60 / 180 * math.pi, -5 / 60 / 180 * math.pi]
 
 
     def getNames(self):

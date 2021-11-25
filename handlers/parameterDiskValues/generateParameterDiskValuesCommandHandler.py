@@ -9,9 +9,9 @@ class ParameterDiskValuesСommandHandler(BaseCommandHandler):
     def execute(self, parameters):
         data_base = SQLDataBase(parameters.nameOfDatabase)
         data_base.create_session()
-        for j in range(21, len(parameters.value)):
+        for j in range(len(parameters.value)):
 
-            type_object = ParameterDiskValues(ID=str(parameters.ID), BladeTypeID=str(parameters.diskTypeID),
+            type_object = ParameterDiskValues(ID=str(parameters.ID), DiskTypeID=str(parameters.diskTypeID),
                                           ParameterDescriptionID = str(parameters.parameterDescriptionID),
                                           Value=parameters.value[j])
             parameters.ID += 1

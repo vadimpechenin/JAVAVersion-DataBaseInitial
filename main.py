@@ -33,7 +33,7 @@ data_base.table_create()
 projectsNumber = appSettings.getValue(appSettings.nameOfProjectsNumber)
 
 for number in range(projectsNumber):
-    #Заполнение таблицы Projects
+    #1. Заполнение таблицы Projects
     NameOfTable = appSettings.getValue(appSettings.projectsNameOfTable)
     projectsID = appSettings.getValue(appSettings.projectsIDName)
     DescriptionName = appSettings.getValue(appSettings.projectsDescriptionName)
@@ -41,7 +41,7 @@ for number in range(projectsNumber):
     parameters = GenerateProjectsCommandHandlerParameter(nameOfDatabase, NameOfTable, projectsID, DescriptionName)
     initInTable = handler.initFunction(0, parameters)
     print(initInTable)
-    # Заполнение таблицы DiskTypes
+    #2. Заполнение таблицы DiskTypes
     if (number == 0):
         NameOfTable = appSettings.getValue(appSettings.diskTypesNameOfTable)
         diskTypesID = appSettings.getValue(appSettings.diskTypesIDName)
@@ -53,7 +53,7 @@ for number in range(projectsNumber):
 
         print(initInTable)
 
-    # Заполнение таблицы BladeTypes
+    #3. Заполнение таблицы BladeTypes
 
         NameOfTable = appSettings.getValue(appSettings.bladeTypesNameOfTable)
         bladeTypesID = appSettings.getValue(appSettings.bladeTypesIDName)
@@ -66,7 +66,7 @@ for number in range(projectsNumber):
         #                     bladeTypesID + 1)
         print(initInTable)
 
-    # Заполнение таблицы Blades.
+    #4. Заполнение таблицы Blades.
     NameOfTable = appSettings.getValue(appSettings.bladesNameOfTable)
     bladesID = appSettings.getValue(appSettings.bladesIDName)
     thickess = appSettings.getValue(appSettings.thickness_name)
@@ -76,14 +76,14 @@ for number in range(projectsNumber):
     externalID = appSettings.getValue(appSettings.bladesExternalIDName)
 
     parameters = GenerateMeasureCommandHandlerParameter(nameOfDatabase, NameOfTable, bladesID, thickess,
-                                                        TThickness, angle, TAngle, bladeTypesNumberBladeDisk,
+                                                        TThickness, angle, TAngle, diskTypesNumberBladeDisk,
                                                         projectsID, externalID, bladeTypesID)
 
     initInTable = handler.initFunction(2, parameters)
     print(initInTable)
 
     if (number == 0):
-        # Заполнение таблицы ParameterDescriptions
+        #5. Заполнение таблицы ParameterDescriptions
         NameOfTable = appSettings.getValue(appSettings.parameterDescriprionsNameOfTable)
         parameterDescriprionsID = appSettings.getValue(appSettings.parameterDescriprionsIDName)
         parameterDescriprionsSystemName= appSettings.getValue(appSettings.parameterDescriprionsSystemNameName)
@@ -95,7 +95,7 @@ for number in range(projectsNumber):
         initInTable = handler.initFunction(3, parameters)
         print(initInTable)
 
-        # Заполнение таблицы ParameterValues
+        #6. Заполнение таблицы ParameterValues
         NameOfTable = appSettings.getValue(appSettings.parameterValuesNameOfTable)
         parameterValuesID = appSettings.getValue(appSettings.parameterValuesIDName)
         parameterValuesValue= appSettings.getValue(appSettings.parameterValuesValueName)
@@ -106,10 +106,28 @@ for number in range(projectsNumber):
         print(initInTable)
         #Увеличение ID для параметров
         appSettings.setValue(appSettings.parameterDescriprionsIDName,
-                             parameterDescriprionsID + len(parameterDescriprionsSystemName))
+                             parameterDescriprionsID + len(parameterValuesValue))
         appSettings.setValue(appSettings.parameterValuesIDName, parameterValuesID + len(parameterValuesValue))
 
-    # Заполнение таблицы Displacements
+        #7. Заполнение таблицы ParameterDiskValues
+        parameterDescriprionsID = appSettings.getValue(appSettings.parameterDescriprionsIDName)
+        NameOfTable = appSettings.getValue(appSettings.parameterDiskValuesNameOfTable)
+        parameterValuesID = appSettings.getValue(appSettings.parameterDiskValuesIDName)
+        parameterValuesValue = appSettings.getValue(appSettings.parameterDiskValuesValueName)
+        parameters = ParameterDiskValuesСommandHandlerParameter(nameOfDatabase, NameOfTable, parameterValuesID,
+                                                            diskTypesID, parameterDescriprionsID,
+                                                            parameterValuesValue)
+        initInTable = handler.initFunction(8, parameters)
+        print(initInTable)
+        # Увеличение ID для параметров
+        appSettings.setValue(appSettings.parameterDescriprionsIDName,
+                             parameterDescriprionsID + len(parameterValuesValue))
+        appSettings.setValue(appSettings.parameterDiskValuesIDName, parameterValuesID + len(parameterValuesValue))
+
+        #8. Заполнение таблицы Disks
+
+
+    #8. Заполнение таблицы Displacements
     NameOfTable = appSettings.getValue(appSettings.displacementNameOfTable)
     displacementID= appSettings.getValue(appSettings.displacementIDName)
     displacementType = appSettings.getValue(appSettings.displacementDisplacementTypeName)
@@ -119,7 +137,7 @@ for number in range(projectsNumber):
     initInTable = handler.initFunction(5, parameters)
     print(initInTable)
 
-    # Заполнение таблицы DisplacementContents
+    #9. Заполнение таблицы DisplacementContents
     NameOfTable = appSettings.getValue(appSettings.displacementContentsNameOfTable)
     displacementContentsID = appSettings.getValue(appSettings.displacementContentsIDName)
     displacementContentsPosition= appSettings.getValue(appSettings.displacementContentsPositionName)
@@ -129,9 +147,9 @@ for number in range(projectsNumber):
     initInTable = handler.initFunction(6, parameters)
     print(initInTable)
 
-    appSettings.setValue(appSettings.displacementContentsIDName, displacementContentsID + bladeTypesNumberBladeDisk)
+    appSettings.setValue(appSettings.displacementContentsIDName, displacementContentsID + diskTypesNumberBladeDisk)
     appSettings.setValue(appSettings.displacementIDName, displacementID + 1)
-    appSettings.setValue(appSettings.bladesIDName, bladesID + bladeTypesNumberBladeDisk)
+    appSettings.setValue(appSettings.bladesIDName, bladesID + diskTypesNumberBladeDisk)
     appSettings.setValue(appSettings.projectsIDName, projectsID + 1)
 
 
