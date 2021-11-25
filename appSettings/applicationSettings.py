@@ -33,15 +33,15 @@ class ApplicationSettings():
     # Толщина паза диска
     thicknessSlot_name = 'thicknessSlot' #Номинальная толщина паза
     TthicknessSlot_name = 'TthicknessSlot' #Допуск на толщину паза
-    deltaThicknessSlot_name = 'deltaThicknessSlot' #Отклонение толщины паза
+    measThicknessSlot_name = 'measThicknessSlot' #Отклонение толщины паза
     #Угол разворота паза относительно оси
     angleAxisSlot_name = 'angleAxisSlot' #Номинальный угол
     TAngleAxisSlot_name = 'TAngleAxisSlot' #Допуск на угол установки
-    deltaAngleAxisSlot_name = 'deltaAngleAxisSlot' #Отклонение угла
+    measAngleAxisSlot_name = 'measAngleAxisSlot' #Отклонение угла
     #Угол расположения паза в радиальном направлении
     angleSlot_name = 'angleSlot' #Номинальный угол 360/84
     TAngleSlot_name = 'TAngleSlot' #Допуск на толщин
-    deltaAngleSlot_name = 'deltaAngleSlot' #Отклонение угла
+    measAngleSlot_name = 'measAngleSlot' #Отклонение угла
 
     # Название файда базы данных
     filedb_name = 'filedb'
@@ -109,7 +109,8 @@ class ApplicationSettings():
 
     # Параметры для сущности Slots
     slotNameOfTable = 'Slots'
-    slotIDName = 'slotsID'
+    slotsIDName = 'slotsID'
+    slotsExternalIDName = 'slotsExternalID'
 
     # Параметры для сущности ParameterDiskValues
     parameterDiskValuesNameOfTable = 'ParameterDiskValues'
@@ -151,14 +152,14 @@ class ApplicationSettings():
         self.values[self.assemblyGaps_init_name] = None
         # Толщина паза диска
         self.values[self.thicknessSlot_name] = 13.316
-        self.values[self.TthicknessSlot_name] = 0.06
-        self.values[self.deltaThicknessSlot_name] = None
+        self.values[self.TthicknessSlot_name] = [-0.12, 0.06]
+        self.values[self.measThicknessSlot_name] = None
         self.values[self.angleAxisSlot_name] = 24/180*math.pi
-        self.values[self.TAngleAxisSlot_name] = 5/60/180*math.pi
-        self.values[self.deltaAngleAxisSlot_name] = None
+        self.values[self.TAngleAxisSlot_name] = [-5/60/180*math.pi, 5/60/180*math.pi]
+        self.values[self.measAngleAxisSlot_name] = None
         self.values[self.angleSlot_name] = 360/84/180*math.pi
-        self.values[self.TAngleSlot_name] = 5/60/180*math.pi
-        self.values[self.deltaAngleSlot_name] = None
+        self.values[self.TAngleSlot_name] = [-5/60/180*math.pi, 5/60/180*math.pi]
+        self.values[self.measAngleSlot_name] = None
 
 
         self.values[self.nameOfDatabase] = 'set_of_blades2.db'
@@ -257,7 +258,8 @@ class ApplicationSettings():
 
         # Параметры для сущности Slots
         self.values[self.slotNameOfTable] = 'Slots'
-        self.values[self.slotIDName] = 1
+        self.values[self.slotsIDName] = 1
+        self.values[self.slotsExternalIDName] = 1
 
         # Параметры для сущности ParameterDiskValues
         self.values[self.parameterDiskValuesNameOfTable] = 'parameterDiskValues'

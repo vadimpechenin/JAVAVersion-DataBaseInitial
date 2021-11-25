@@ -22,6 +22,9 @@ from handlers.generateDisplacementContents.generateDisplacementContentsCommandHa
 
 from handlers.generateDiskTypes.generateDiskTypesHandlerParameter import GenerateDiskTypesCommandHandlerParameter
 from handlers.parameterDiskValues.generateParameterDiskValuesCommandHandlerParameter import ParameterDiskValuesСommandHandlerParameter
+from handlers.generateDisks.generateDisksCommandHandlerParameter import GenerateDisksCommandHandlerParameter
+from handlers.generateSlots.generateSlotsCommandHandlerParameter import GenerateSlotsCommandHandlerParameter
+
 
 nameOfDatabase = appSettings.getValue(appSettings.nameOfDatabase)
 
@@ -124,10 +127,37 @@ for number in range(projectsNumber):
                              parameterDescriprionsID + len(parameterValuesValue))
         appSettings.setValue(appSettings.parameterDiskValuesIDName, parameterValuesID + len(parameterValuesValue))
 
-        #8. Заполнение таблицы Disks
+    #8. Заполнение таблицы Disks
+    NameOfTable = appSettings.getValue(appSettings.diskNameOfTable)
+    diskID = appSettings.getValue(appSettings.diskIDName)
+
+    parameters = GenerateDisksCommandHandlerParameter(nameOfDatabase, NameOfTable,
+                                                          diskID, projectsID, bladeTypesID)
+    initInTable = handler.initFunction(9, parameters)
+
+    print(initInTable)
 
 
-    #8. Заполнение таблицы Displacements
+    #9. Заполнение таблицы Slots
+    NameOfTable = appSettings.getValue(appSettings.slotNameOfTable)
+    slotsID = appSettings.getValue(appSettings.slotsIDName)
+
+    thicknessSlot = appSettings.getValue(appSettings.thicknessSlot_name)
+    TthicknessSlot = appSettings.getValue(appSettings.TthicknessSlot_name)
+    angleAxisSlot = appSettings.getValue(appSettings.angleAxisSlot_name)
+    TAngleAxisSlot = appSettings.getValue(appSettings.TAngleAxisSlot_name)
+    angleSlot = appSettings.getValue(appSettings.angleSlot_name)
+    TAngleSlot = appSettings.getValue(appSettings.TAngleSlot_name)
+    externalID = appSettings.getValue(appSettings.slotsExternalIDName)
+
+    parameters = GenerateSlotsCommandHandlerParameter(nameOfDatabase, NameOfTable, slotsID, thicknessSlot, TthicknessSlot,
+                                                        angleAxisSlot, TAngleAxisSlot, angleSlot, TAngleSlot,
+                                                    diskTypesNumberBladeDisk, externalID, diskID)
+    initInTable = handler.initFunction(10, parameters)
+
+    print(initInTable)
+
+    #10. Заполнение таблицы Displacements
     NameOfTable = appSettings.getValue(appSettings.displacementNameOfTable)
     displacementID= appSettings.getValue(appSettings.displacementIDName)
     displacementType = appSettings.getValue(appSettings.displacementDisplacementTypeName)
@@ -137,7 +167,7 @@ for number in range(projectsNumber):
     initInTable = handler.initFunction(5, parameters)
     print(initInTable)
 
-    #9. Заполнение таблицы DisplacementContents
+    #11. Заполнение таблицы DisplacementContents
     NameOfTable = appSettings.getValue(appSettings.displacementContentsNameOfTable)
     displacementContentsID = appSettings.getValue(appSettings.displacementContentsIDName)
     displacementContentsPosition= appSettings.getValue(appSettings.displacementContentsPositionName)
@@ -149,7 +179,9 @@ for number in range(projectsNumber):
 
     appSettings.setValue(appSettings.displacementContentsIDName, displacementContentsID + diskTypesNumberBladeDisk)
     appSettings.setValue(appSettings.displacementIDName, displacementID + 1)
+    appSettings.setValue(appSettings.diskIDName, diskID + 1)
     appSettings.setValue(appSettings.bladesIDName, bladesID + diskTypesNumberBladeDisk)
+    appSettings.setValue(appSettings.slotsIDName, slotsID + diskTypesNumberBladeDisk)
     appSettings.setValue(appSettings.projectsIDName, projectsID + 1)
 
 

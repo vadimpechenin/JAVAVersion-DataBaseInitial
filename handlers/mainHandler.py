@@ -12,6 +12,8 @@ from handlers.generateDisplacementContents.generateDisplacementContentsCommandHa
 
 from handlers.generateDiskTypes.generateDiskTypesHandler import GenerateDiskTypesCommandHandler
 from handlers.parameterDiskValues.generateParameterDiskValuesCommandHandler import ParameterDiskValuesСommandHandler
+from handlers.generateDisks.generateDisksCommandHandler import GenerateDisksCommandHandler
+from handlers.generateSlots.generateSlotsCommandHandler import GenerateSlotsCommandHandler
 
 class MainHandler():
     def __init__(self):
@@ -26,6 +28,8 @@ class MainHandler():
 
         self.dict[7] = GenerateDiskTypesCommandHandler()
         self.dict[8] = ParameterDiskValuesСommandHandler()
+        self.dict[9] = GenerateDisksCommandHandler()
+        self.dict[10] = GenerateSlotsCommandHandler()
 
     def initFunction(self,code_request, parameter):
         result = None
