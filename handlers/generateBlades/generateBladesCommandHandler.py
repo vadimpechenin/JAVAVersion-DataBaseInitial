@@ -12,11 +12,11 @@ class GenerateBladesCommandHandler(BaseCommandHandler):
         # Запрос к базе данных на заполнение данных
         data_base = SQLDataBase(parameters.nameOfDatabase)
         data_base.create_session()
-        thiknessMeausred, anglesMeausred = self.generateThiknessAngles(parameters)
+        thiknessMeausred, anglesMeausred, thiknessMeausredT = self.generateThiknessAngles(parameters)
         for j in range(parameters.numberBladeDisk):
             parameters.externalID = randint(1, 1000)
             type_object = Blades(ID = str(parameters.ID), TypeID = str(parameters.typeID),
-                                 MeasThickness = thiknessMeausred[j], MeasAngle = anglesMeausred[j],
+                                 MeasThickness = thiknessMeausred[j], MeasAngle = anglesMeausred[j], MeasThicknessT = thiknessMeausredT[j],
                                  ExternalID = str(parameters.externalID), ProjectID = str(parameters.projectID))
             parameters.ID += 1
             data_base.databaseAddCommit(type_object)
@@ -33,4 +33,9 @@ class GenerateBladesCommandHandler(BaseCommandHandler):
         anglesMeausred = np.random.normal(parameters.angle + (parameters.TAngle[1] + parameters.TAngle[0]) / 2,
                                           (parameters.TAngle[1] - parameters.TAngle[0]) / 6,
                                           parameters.numberBladeDisk)
-        return thiknessMeausred, anglesMeausred
+
+        thiknessMeausredT = np.random.normal(
+            parameters.thickessT + (parameters.TThicknessT[1] + parameters.TThicknessT[0]) / 2,
+            (parameters.TThicknessT[1] - parameters.TThicknessT[0]) / 6,
+            parameters.numberBladeDisk)
+        return thiknessMeausred, anglesMeausred, thiknessMeausredT

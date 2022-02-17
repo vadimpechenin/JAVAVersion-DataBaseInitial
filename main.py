@@ -76,10 +76,13 @@ for number in range(projectsNumber):
     TThickness = appSettings.getValue(appSettings.T_thickness_name)
     angle = appSettings.getValue(appSettings.angle_name)
     TAngle = appSettings.getValue(appSettings.T_angle_name)
+    thicknessT = appSettings.getValue(appSettings.thickness_T_name)
+    TThicknessT = appSettings.getValue(appSettings.T_thickness_name)
     externalID = appSettings.getValue(appSettings.bladesExternalIDName)
 
     parameters = GenerateMeasureCommandHandlerParameter(nameOfDatabase, NameOfTable, bladesID, thickess,
-                                                        TThickness, angle, TAngle, diskTypesNumberBladeDisk,
+                                                        TThickness, angle, TAngle, thicknessT,
+                                                        TThicknessT, diskTypesNumberBladeDisk,
                                                         projectsID, externalID, bladeTypesID)
 
     initInTable = handler.initFunction(2, parameters)
@@ -149,10 +152,11 @@ for number in range(projectsNumber):
     angleSlot = appSettings.getValue(appSettings.angleSlot_name)
     TAngleSlot = appSettings.getValue(appSettings.TAngleSlot_name)
     externalID = appSettings.getValue(appSettings.slotsExternalIDName)
+    displacementContentsPosition = appSettings.getValue(appSettings.displacementContentsPositionName)
 
     parameters = GenerateSlotsCommandHandlerParameter(nameOfDatabase, NameOfTable, slotsID, thicknessSlot, TthicknessSlot,
                                                         angleAxisSlot, TAngleAxisSlot, angleSlot, TAngleSlot,
-                                                    diskTypesNumberBladeDisk, externalID, diskID)
+                                                    diskTypesNumberBladeDisk, externalID, diskID,displacementContentsPosition)
     initInTable = handler.initFunction(10, parameters)
 
     print(initInTable)
@@ -173,7 +177,7 @@ for number in range(projectsNumber):
     displacementContentsPosition= appSettings.getValue(appSettings.displacementContentsPositionName)
     parameters = GenerateDisplacementContentsCommandHandlerParameter(nameOfDatabase, NameOfTable, displacementContentsID,
                                                               displacementID,
-                                                              bladesID, displacementContentsPosition)
+                                                              bladesID, slotsID,diskTypesNumberBladeDisk)
     initInTable = handler.initFunction(6, parameters)
     print(initInTable)
 

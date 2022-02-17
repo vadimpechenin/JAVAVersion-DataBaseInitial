@@ -12,7 +12,7 @@ class ParameterDiskValues(Base):
     __tablename__ = 'ParameterDiskValues'
     ID = sa.Column(sa.String(), primary_key=True, autoincrement=False)
     DiskTypeID = sa.Column(sa.String, sa.ForeignKey('DiskTypes.ID'), nullable=False)
-    ParameterDescriptionID = sa.Column(sa.Float, sa.ForeignKey('ParameterDescriptions.ID'), nullable=False)
+    ParameterDescriptionID = sa.Column(sa.String, sa.ForeignKey('ParameterDescriptions.ID'), nullable=False)
     Value = sa.Column(sa.Float)
 
     def __repr__(self):

@@ -18,7 +18,7 @@ class GenerateSlotsCommandHandler(BaseCommandHandler):
             parameters.externalID = j+1
             type_object = Slots(ID = str(parameters.ID), DiskID = str(parameters.diskID),
                                  measThicknessSlot = measThicknessSlot[j], measAngleAxisSlot = measAngleAxisSlot[j],
-                                 measAngleSlot = measAngleSlot[j], ExternalID = str(parameters.externalID))
+                                 measAngleSlot = measAngleSlot[j], ExternalID = str(parameters.externalID), Position = j+1)
             parameters.ID += 1
             data_base.databaseAddCommit(type_object)
 

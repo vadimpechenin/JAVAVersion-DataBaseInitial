@@ -162,7 +162,7 @@ class ApplicationSettings():
         self.values[self.measAngleSlot_name] = None
 
 
-        self.values[self.nameOfDatabase] = 'set_of_blades2.db'
+        self.values[self.nameOfDatabase] = 'set_of_blades3.db'
         self.values[self.projectsNameOfTable] = 'Projects'
         self.values[self.projectsIDName] = 1
         self.values[self.projectsDescriptionName] = 'projectsDescription'

@@ -16,6 +16,7 @@ class Slots(Base):
     measAngleAxisSlot= sa.Column(sa.Float)
     measAngleSlot = sa.Column(sa.Float)
     ExternalID = sa.Column(sa.String)
+    Position = sa.Column(sa.Integer)
 
     def __repr__(self):
         # для печати строки и отладки

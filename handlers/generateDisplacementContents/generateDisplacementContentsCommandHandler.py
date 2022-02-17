@@ -10,11 +10,12 @@ class GenerateDisplacementContentsCommandHandler(BaseCommandHandler):
         # Запрос к базе данных на заполнение данных
         data_base = SQLDataBase(parameters.nameOfDatabase)
         data_base.create_session()
-        for j in parameters.position:
+        for j in range(parameters.numberBladeDisk):
             type_object = DisplacementContents(ID = str(parameters.ID), DisplacementID = str(parameters.displacementID),
-                                               BladeID = str(parameters.bladeID), Position = j)
+                                               BladeID = str(parameters.bladeID), SlotID = str(parameters.slotID))
             parameters.bladeID += 1
             parameters.ID += 1
+            parameters.slotID += 1
             data_base.databaseAddCommit(type_object)
         ciphers = data_base.select_all_params_in_table(parameters.nameOfTable)
         return ciphers
