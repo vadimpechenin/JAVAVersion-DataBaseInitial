@@ -1,7 +1,7 @@
 from handlers.baseCommandHandlerParameter import BaseCommandHandlerParameter
 
 class GenerateDisplacementContentsCommandHandlerParameter(BaseCommandHandlerParameter):
-    def __init__(self, nameOfDatabase, nameOfTable, ID, displacementID, bladeID, slotID, numberBladeDisk):
+    def __init__(self, nameOfDatabase, nameOfTable, ID, displacementID, bladeID, slotID, numberBladeDisk,uuidObject):
         self.nameOfDatabase = nameOfDatabase
         self.nameOfTable = nameOfTable
         self.ID = ID
@@ -10,3 +10,4 @@ class GenerateDisplacementContentsCommandHandlerParameter(BaseCommandHandlerPara
         #self.position = position
         self.slotID = slotID
         self.numberBladeDisk = numberBladeDisk
+        self.uuidObject = uuidObject

@@ -1,3 +1,4 @@
+from db.UUIDClass import UUIDClass
 from handlers.baseCommandHandler import BaseCommandHandler
 from db.mainSQL import SQLDataBase
 from db.blades import Blades
@@ -15,9 +16,14 @@ class GenerateBladesCommandHandler(BaseCommandHandler):
         thiknessMeausred, anglesMeausred, thiknessMeausredT = self.generateThiknessAngles(parameters)
         for j in range(parameters.numberBladeDisk):
             parameters.externalID = randint(1, 1000)
-            type_object = Blades(ID = str(parameters.ID), TypeID = str(parameters.typeID),
+
+            # Генерация uuid для подстановки
+            ID = UUIDClass.geterateUUIDWithout_()
+            parameters.uuidObject.bladesIDList.append(ID)
+
+            type_object = Blades(ID = ID, TypeID = parameters.uuidObject.bladesTypesIDList[parameters.typeID-1],
                                  MeasThickness = thiknessMeausred[j], MeasAngle = anglesMeausred[j], MeasThicknessT = thiknessMeausredT[j],
-                                 ExternalID = str(parameters.externalID), ProjectID = str(parameters.projectID))
+                                 ExternalID = str(parameters.externalID), ProjectID = parameters.uuidObject.projectsIDList[parameters.projectID-1])
             parameters.ID += 1
             data_base.databaseAddCommit(type_object)
 

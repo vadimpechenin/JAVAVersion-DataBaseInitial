@@ -162,11 +162,11 @@ class ApplicationSettings():
         self.values[self.measAngleSlot_name] = None
 
 
-        self.values[self.nameOfDatabase] = 'set_of_blades4.db'
+        self.values[self.nameOfDatabase] = 'set_of_blades5_uuid.db'
         self.values[self.projectsNameOfTable] = 'Projects'
         self.values[self.projectsIDName] = 1
         self.values[self.projectsDescriptionName] = 'projectsDescription'
-        self.values[self.nameOfProjectsNumber] = 1 #2
+        self.values[self.nameOfProjectsNumber] = 2 #2
 
         # Параметры для сущности BladesTypes
         self.values[self.bladeTypesNameOfTable] = 'BladeTypes'

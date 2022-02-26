@@ -2,7 +2,7 @@ from handlers.baseCommandHandlerParameter import BaseCommandHandlerParameter
 
 class GenerateSlotsCommandHandlerParameter(BaseCommandHandlerParameter):
     def __init__(self, nameOfDatabase, nameOfTable, ID, thicknessSlot, TthicknessSlot, angleAxisSlot, TAngleAxisSlot,
-                 angleSlot, TAngleSlot,numberBladeDisk, externalID, diskID, position):
+                 angleSlot, TAngleSlot,numberBladeDisk, externalID, diskID, position,uuidObject):
         self.nameOfDatabase = nameOfDatabase
         self.nameOfTable = nameOfTable
         self.ID = ID
@@ -16,3 +16,4 @@ class GenerateSlotsCommandHandlerParameter(BaseCommandHandlerParameter):
         self.externalID = externalID
         self.diskID = diskID
         self.position = position
+        self.uuidObject = uuidObject

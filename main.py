@@ -1,6 +1,7 @@
 """
 Тестовая программа для создания и наполнения базы данных
 """
+from db.UUIDClass import UUIDClass
 from db.mainSQL import SQLDataBase
 
 #Основные параметры для заполнения
@@ -35,13 +36,16 @@ data_base.table_create()
 #Последовательное заполнение таблиц проекта
 projectsNumber = appSettings.getValue(appSettings.nameOfProjectsNumber)
 
+#Объект для сохранения списка всех ключей
+uuidObject = UUIDClass()
+
 for number in range(projectsNumber):
     #1. Заполнение таблицы Projects
     NameOfTable = appSettings.getValue(appSettings.projectsNameOfTable)
     projectsID = appSettings.getValue(appSettings.projectsIDName)
     DescriptionName = appSettings.getValue(appSettings.projectsDescriptionName)
 
-    parameters = GenerateProjectsCommandHandlerParameter(nameOfDatabase, NameOfTable, projectsID, DescriptionName)
+    parameters = GenerateProjectsCommandHandlerParameter(nameOfDatabase, NameOfTable, projectsID, DescriptionName,uuidObject)
     initInTable = handler.initFunction(0, parameters)
     print(initInTable)
     #2. Заполнение таблицы DiskTypes
@@ -51,7 +55,7 @@ for number in range(projectsNumber):
         diskTypesName = appSettings.getValue(appSettings.diskTypesNameName)
         diskTypesNumberBladeDisk = appSettings.getValue(appSettings.diskTypesNumberBladeDiskName)
         parameters = GenerateDiskTypesCommandHandlerParameter(nameOfDatabase, NameOfTable,
-                                                               diskTypesID, diskTypesName, diskTypesNumberBladeDisk)
+                                                               diskTypesID, diskTypesName, diskTypesNumberBladeDisk,uuidObject)
         initInTable = handler.initFunction(7, parameters)
 
         print(initInTable)
@@ -63,7 +67,7 @@ for number in range(projectsNumber):
         bladeTypesName = appSettings.getValue(appSettings.bladeTypesNameName)
         #bladeTypesNumberBladeDisk= appSettings.getValue(appSettings.bladeTypesNumberBladeDiskName)
         parameters = GenerateBladeTypesCommandHandlerParameter(nameOfDatabase, NameOfTable,
-                                                             bladeTypesID, bladeTypesName, diskTypesID)
+                                                             bladeTypesID, bladeTypesName, diskTypesID,uuidObject)
         initInTable = handler.initFunction(1, parameters)
         #appSettings.setValue(appSettings.bladeTypesIDName,
         #                     bladeTypesID + 1)
@@ -83,7 +87,7 @@ for number in range(projectsNumber):
     parameters = GenerateMeasureCommandHandlerParameter(nameOfDatabase, NameOfTable, bladesID, thickess,
                                                         TThickness, angle, TAngle, thicknessT,
                                                         TThicknessT, diskTypesNumberBladeDisk,
-                                                        projectsID, externalID, bladeTypesID)
+                                                        projectsID, externalID, bladeTypesID,uuidObject)
 
     initInTable = handler.initFunction(2, parameters)
     print(initInTable)
@@ -97,7 +101,7 @@ for number in range(projectsNumber):
 
         parameters = ParameterDescriptionsСommandHandlerParameter(nameOfDatabase, NameOfTable, parameterDescriprionsID,
                                                                   parameterDescriprionsSystemName,
-                                                                  parameterDescriprionsDisplayName)
+                                                                  parameterDescriprionsDisplayName,uuidObject)
         initInTable = handler.initFunction(3, parameters)
         print(initInTable)
 
@@ -107,7 +111,7 @@ for number in range(projectsNumber):
         parameterValuesValue= appSettings.getValue(appSettings.parameterValuesValueName)
         parameters = ParameterValuesСommandHandlerParameter(nameOfDatabase, NameOfTable, parameterValuesID,
                                                                   bladeTypesID, parameterDescriprionsID,
-                                                                  parameterValuesValue)
+                                                                  parameterValuesValue,uuidObject)
         initInTable = handler.initFunction(4, parameters)
         print(initInTable)
         #Увеличение ID для параметров
@@ -122,7 +126,7 @@ for number in range(projectsNumber):
         parameterValuesValue = appSettings.getValue(appSettings.parameterDiskValuesValueName)
         parameters = ParameterDiskValuesСommandHandlerParameter(nameOfDatabase, NameOfTable, parameterValuesID,
                                                             diskTypesID, parameterDescriprionsID,
-                                                            parameterValuesValue)
+                                                            parameterValuesValue,uuidObject)
         initInTable = handler.initFunction(8, parameters)
         print(initInTable)
         # Увеличение ID для параметров
@@ -135,7 +139,7 @@ for number in range(projectsNumber):
     diskID = appSettings.getValue(appSettings.diskIDName)
 
     parameters = GenerateDisksCommandHandlerParameter(nameOfDatabase, NameOfTable,
-                                                          diskID, projectsID, bladeTypesID)
+                                                          diskID, projectsID, bladeTypesID,uuidObject)
     initInTable = handler.initFunction(9, parameters)
 
     print(initInTable)
@@ -156,7 +160,8 @@ for number in range(projectsNumber):
 
     parameters = GenerateSlotsCommandHandlerParameter(nameOfDatabase, NameOfTable, slotsID, thicknessSlot, TthicknessSlot,
                                                         angleAxisSlot, TAngleAxisSlot, angleSlot, TAngleSlot,
-                                                    diskTypesNumberBladeDisk, externalID, diskID,displacementContentsPosition)
+                                                    diskTypesNumberBladeDisk, externalID, diskID,
+                                                      displacementContentsPosition,uuidObject)
     initInTable = handler.initFunction(10, parameters)
 
     print(initInTable)
@@ -167,7 +172,7 @@ for number in range(projectsNumber):
     displacementType = appSettings.getValue(appSettings.displacementDisplacementTypeName)
     parameters = GenerateDisplacementsCommandHandlerParameter(nameOfDatabase, NameOfTable, displacementID,
                                                               projectsID,
-                                                              displacementType)
+                                                              displacementType,uuidObject)
     initInTable = handler.initFunction(5, parameters)
     print(initInTable)
 
@@ -177,7 +182,7 @@ for number in range(projectsNumber):
     displacementContentsPosition= appSettings.getValue(appSettings.displacementContentsPositionName)
     parameters = GenerateDisplacementContentsCommandHandlerParameter(nameOfDatabase, NameOfTable, displacementContentsID,
                                                               displacementID,
-                                                              bladesID, slotsID,diskTypesNumberBladeDisk)
+                                                              bladesID, slotsID,diskTypesNumberBladeDisk,uuidObject)
     initInTable = handler.initFunction(6, parameters)
     print(initInTable)
 

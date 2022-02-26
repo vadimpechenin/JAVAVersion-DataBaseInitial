@@ -1,3 +1,4 @@
+from db.UUIDClass import UUIDClass
 from handlers.baseCommandHandler import BaseCommandHandler
 from db.mainSQL import SQLDataBase
 from db.disks import Disks
@@ -10,8 +11,13 @@ class GenerateDisksCommandHandler(BaseCommandHandler):
         # Запрос к базе данных на заполнение данных
         data_base = SQLDataBase(parameters.nameOfDatabase)
         data_base.create_session()
-        type_object = Disks(ID = str(parameters.ID), TypeID = str(parameters.typeID),
-                                 ProjectID = str(parameters.projectID))
+
+        # Генерация uuid для подстановки
+        ID = UUIDClass.geterateUUIDWithout_()
+        parameters.uuidObject.disksIDList.append(ID)
+
+        type_object = Disks(ID = ID, TypeID = parameters.uuidObject.diskTypesIDList[parameters.typeID-1],
+                                 ProjectID = parameters.uuidObject.projectsIDList[parameters.projectID-1])
 
         data_base.databaseAddCommit(type_object)
 

@@ -1,3 +1,4 @@
+from db.UUIDClass import UUIDClass
 from handlers.baseCommandHandler import BaseCommandHandler
 from db.mainSQL import SQLDataBase
 from db.parameterValues import ParameterValues
@@ -11,8 +12,12 @@ class ParameterValuesСommandHandler(BaseCommandHandler):
         data_base.create_session()
         for j in range(len(parameters.value)): #len(parameters.value)
 
-            type_object = ParameterValues(ID=str(parameters.ID), BladeTypeID=str(parameters.bladeTypeID),
-                                          ParameterDescriptionID = str(parameters.parameterDescriptionID),
+            # Генерация uuid для подстановки
+            ID = UUIDClass.geterateUUIDWithout_()
+            parameters.uuidObject.parameterValuesIDList.append(ID)
+
+            type_object = ParameterValues(ID=ID, BladeTypeID=parameters.uuidObject.bladesTypesIDList[parameters.bladeTypeID-1],
+                                          ParameterDescriptionID = parameters.uuidObject.parameterDescriptionsIDList[parameters.parameterDescriptionID-1],
                                           Value=parameters.value[j])
             parameters.ID += 1
             parameters.parameterDescriptionID += 1

@@ -1,3 +1,4 @@
+from db.UUIDClass import UUIDClass
 from handlers.baseCommandHandler import BaseCommandHandler
 from db.mainSQL import SQLDataBase
 from db.slots import Slots
@@ -15,8 +16,13 @@ class GenerateSlotsCommandHandler(BaseCommandHandler):
         measThicknessSlot, measAngleAxisSlot, measAngleSlot = self.generateMeasuredParametersInSlots(parameters)
 
         for j in range(parameters.numberBladeDisk):
+
+            # Генерация uuid для подстановки
+            ID = UUIDClass.geterateUUIDWithout_()
+            parameters.uuidObject.slotsIDList.append(ID)
+
             parameters.externalID = j+1
-            type_object = Slots(ID = str(parameters.ID), DiskID = str(parameters.diskID),
+            type_object = Slots(ID = ID, DiskID = parameters.uuidObject.disksIDList[parameters.diskID-1],
                                  measThicknessSlot = measThicknessSlot[j], measAngleAxisSlot = measAngleAxisSlot[j],
                                  measAngleSlot = measAngleSlot[j], ExternalID = str(parameters.externalID), Position = j+1)
             parameters.ID += 1

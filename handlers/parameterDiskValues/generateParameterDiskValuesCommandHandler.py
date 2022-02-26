@@ -1,3 +1,4 @@
+from db.UUIDClass import UUIDClass
 from handlers.baseCommandHandler import BaseCommandHandler
 from db.mainSQL import SQLDataBase
 from db.parameterDiskValues import ParameterDiskValues
@@ -11,8 +12,12 @@ class ParameterDiskValuesСommandHandler(BaseCommandHandler):
         data_base.create_session()
         for j in range(len(parameters.value)):
 
-            type_object = ParameterDiskValues(ID=str(parameters.ID), DiskTypeID=str(parameters.diskTypeID),
-                                          ParameterDescriptionID = str(parameters.parameterDescriptionID),
+            # Генерация uuid для подстановки
+            ID = UUIDClass.geterateUUIDWithout_()
+            parameters.uuidObject.parameterDiskValuesIDList.append(ID)
+
+            type_object = ParameterDiskValues(ID=ID, DiskTypeID= parameters.uuidObject.diskTypesIDList[parameters.diskTypeID-1],
+                                          ParameterDescriptionID = parameters.uuidObject.parameterDescriptionsIDList[parameters.parameterDescriptionID-1],
                                           Value=parameters.value[j])
             parameters.ID += 1
             parameters.parameterDescriptionID += 1
