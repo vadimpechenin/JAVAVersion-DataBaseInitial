@@ -34,6 +34,11 @@ class ApplicationSettings():
     thicknessSlot_name = 'thicknessSlot' #Номинальная толщина паза
     TthicknessSlot_name = 'TthicknessSlot' #Допуск на толщину паза
     measThicknessSlot_name = 'measThicknessSlot' #Отклонение толщины паза
+    #Толщина хвостовика
+    thicknessLock_name = 'thicknessLock' #Номинальная толщина хвостовика
+    TthicknessLock_name = 'TthicknessLock' #Допуск на толщину хвостовика
+    measThicknessLock_name = 'measThicknessLock' #Отклонение толщины хвостовика
+
     #Угол разворота паза относительно оси
     angleAxisSlot_name = 'angleAxisSlot' #Номинальный угол
     TAngleAxisSlot_name = 'TAngleAxisSlot' #Допуск на угол установки
@@ -150,6 +155,11 @@ class ApplicationSettings():
         self.values[self.assemblyChord_name] = None
         self.values[self.assemblyGaps_name] = None
         self.values[self.assemblyGaps_init_name] = None
+        #Толщина хвостовика лопатки
+        self.values[self.thicknessLock_name] = 13.316
+        self.values[self.TthicknessLock_name] = [-0.12, 0.06]
+        self.values[self.measThicknessLock_name] = None
+
         # Толщина паза диска
         self.values[self.thicknessSlot_name] = 13.316
         self.values[self.TthicknessSlot_name] = [-0.12, 0.06]
@@ -162,7 +172,7 @@ class ApplicationSettings():
         self.values[self.measAngleSlot_name] = None
 
 
-        self.values[self.nameOfDatabase] = 'set_of_blades5_uuid.db'
+        self.values[self.nameOfDatabase] = 'set_of_blades6_uuid.db'#'set_of_blades5_uuid.db'
         self.values[self.projectsNameOfTable] = 'Projects'
         self.values[self.projectsIDName] = 1
         self.values[self.projectsDescriptionName] = 'projectsDescription'
@@ -194,10 +204,13 @@ class ApplicationSettings():
                                                                  'T_shelf_width_half_T_lower','T_shelf_width_half_T_upper',
                                                                  'shelf_width_B','shelf_width_half_B',
                                                                  'T_shelf_width_half_B_lower','T_shelf_width_half_B_upper',
+                                                                 'thickness_L_nom', 'T_thickness_L_lower',
+                                                                 'T_thickness_L_upper',
                                                                  'angle_slice','slice_B','slice_T',
                                                                  'thickness_slot','thickness_slot_upper','thickness_slot_lower',
                                                                  'angle_axis_slot','angle_axis_slot_upper','angle_axis_slot_lower',
-                                                                 'angle_slot','angle_slot_upper','angle_slot_lower']
+                                                                 'angle_slot','angle_slot_upper','angle_slot_lower'
+                                                                 ]
         self.values[self.parameterDescriprionsDisplayNameName] = ['Допуск на толщину нижний','Допуск на толщину верхний',
                                                                   'Допуск на угол нижний', 'Допуск на угол верхний',
                                                                   'Номинальное значение толщины, обеспечивающее натяг',
@@ -216,6 +229,9 @@ class ApplicationSettings():
                                                                   'Угол для срезов лопаток',
                                                                   'Расстояния до срезов лопаток со стороны спинки',
                                                                   'Расстояния до срезов лопаток со стороны корыта',
+                                                                  'Толщина хвостовика лопатки',
+                                                                  'Допуск на толщину хвостовика нижнее',
+                                                                  'Допуск на толщину хвостовика верхнее',
                                                                   'Толщина паза в диске',
                                                                   'Допуск на толщину паза нижнее',
                                                                   'Допуск на толщину паза верхнее',
@@ -225,7 +241,7 @@ class ApplicationSettings():
                                                                   'Угол паза',
                                                                   'Допуск на угол паза нижнее',
                                                                   'Допуск на угол паза верхнее'
-                                                                  ]
+                                                                 ]
         # Параметры для сущности ParameterValues
         self.values[self.parameterValuesNameOfTable] = 'parameterValues'
         self.values[self.parameterValuesIDName] = 1
@@ -233,7 +249,8 @@ class ApplicationSettings():
                                                         25.13, 11.1, 25.13 - 11.1, 11.1 * 24.73 / 25.13,
                                                         24.73 -11.1 * 24.73 / 25.13, 30 / 180 * math.pi,
                                                         11.75, 6, -0.1, 0.1, 11.5,6.8,-0.1, 0.1,
-                                                        50 / 180 * math.pi, 16.05, 12.7
+                                                        50 / 180 * math.pi, 16.05, 12.7,
+                                                        13.316, 0.06, -0.12
                                                       ]
 
         # Параметры для сущности Displacements

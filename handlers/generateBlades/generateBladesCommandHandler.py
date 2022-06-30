@@ -13,7 +13,7 @@ class GenerateBladesCommandHandler(BaseCommandHandler):
         # Запрос к базе данных на заполнение данных
         data_base = SQLDataBase(parameters.nameOfDatabase)
         data_base.create_session()
-        thiknessMeausred, anglesMeausred, thiknessMeausredT = self.generateThiknessAngles(parameters)
+        thiknessMeausred, anglesMeausred, thiknessMeausredT, thiknessMeausredL = self.generateThiknessAngles(parameters)
         for j in range(parameters.numberBladeDisk):
             parameters.externalID = randint(1, 1000)
 
@@ -22,7 +22,7 @@ class GenerateBladesCommandHandler(BaseCommandHandler):
             parameters.uuidObject.bladesIDList.append(ID)
 
             type_object = Blades(ID = ID, TypeID = parameters.uuidObject.bladesTypesIDList[parameters.typeID-1],
-                                 MeasThickness = thiknessMeausred[j], MeasAngle = anglesMeausred[j], MeasThicknessT = thiknessMeausredT[j],
+                                 MeasThickness = thiknessMeausred[j], MeasAngle = anglesMeausred[j], MeasThicknessT = thiknessMeausredT[j], MeasThicknessLock = thiknessMeausredL[j],
                                  ExternalID = str(parameters.externalID), ProjectID = parameters.uuidObject.projectsIDList[parameters.projectID-1])
             parameters.ID += 1
             data_base.databaseAddCommit(type_object)
@@ -44,4 +44,9 @@ class GenerateBladesCommandHandler(BaseCommandHandler):
             parameters.thickessT + (parameters.TThicknessT[1] + parameters.TThicknessT[0]) / 2,
             (parameters.TThicknessT[1] - parameters.TThicknessT[0]) / 6,
             parameters.numberBladeDisk)
-        return thiknessMeausred, anglesMeausred, thiknessMeausredT
+
+        thiknessMeausredL = np.random.normal(
+            parameters.thicknessL + (parameters.TThicknessL[1] + parameters.TThicknessL[0]) / 2,
+            (parameters.TThicknessL[1] - parameters.TThicknessL[0]) / 6,
+            parameters.numberBladeDisk)
+        return thiknessMeausred, anglesMeausred, thiknessMeausredT, thiknessMeausredL

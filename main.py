@@ -82,11 +82,15 @@ for number in range(projectsNumber):
     TAngle = appSettings.getValue(appSettings.T_angle_name)
     thicknessT = appSettings.getValue(appSettings.thickness_T_name)
     TThicknessT = appSettings.getValue(appSettings.T_thickness_name)
+    #Допуск и толщина хвостовика
+    thicknessL = appSettings.getValue(appSettings.thicknessLock_name)
+    TThicknessL = appSettings.getValue(appSettings.TthicknessLock_name)
+
     externalID = appSettings.getValue(appSettings.bladesExternalIDName)
 
     parameters = GenerateMeasureCommandHandlerParameter(nameOfDatabase, NameOfTable, bladesID, thickess,
                                                         TThickness, angle, TAngle, thicknessT,
-                                                        TThicknessT, diskTypesNumberBladeDisk,
+                                                        TThicknessT, thicknessL, TThicknessL, diskTypesNumberBladeDisk,
                                                         projectsID, externalID, bladeTypesID,uuidObject)
 
     initInTable = handler.initFunction(2, parameters)

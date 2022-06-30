@@ -16,10 +16,12 @@ class Blades(Base):
     MeasAngle= sa.Column(sa.Float)
     #Нововведение после экспериментов
     MeasThicknessT = sa.Column(sa.Float)
+    #Нововведение после ТЗ
+    MeasThicknessLock = sa.Column(sa.Float)
     ExternalID = sa.Column(sa.String)
     ProjectID = sa.Column(sa.String, sa.ForeignKey('Projects.ID'), nullable=False)
 
     def __repr__(self):
         # для печати строки и отладки
-        return '<Blades[ID="{}", TypeID="{}", MeasThickness="{}", MeasAngle="{}", MeasThicknessT="{}", ExternalID="{}", ProjectID="{}"]>'.format(
-            self.ID, self.TypeID, self.MeasThickness, self.MeasAngle, self.MeasThicknessT, self.ExternalID, self.ProjectID)
+        return '<Blades[ID="{}", TypeID="{}", MeasThickness="{}", MeasAngle="{}", MeasThicknessT="{}", MeasThicknessLock="{}", ExternalID="{}", ProjectID="{}"]>'.format(
+            self.ID, self.TypeID, self.MeasThickness, self.MeasAngle, self.MeasThicknessT, self.MeasThicknessLock, self.ExternalID, self.ProjectID)

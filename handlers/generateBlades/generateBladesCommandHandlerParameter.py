@@ -2,7 +2,7 @@ from handlers.baseCommandHandlerParameter import BaseCommandHandlerParameter
 
 class GenerateMeasureCommandHandlerParameter(BaseCommandHandlerParameter):
     def __init__(self, nameOfDatabase, nameOfTable, ID, thickess, TThickness, angle, TAngle, thickessT, TThicknessT,
-                 numberBladeDisk, projectID, externalID, typeID,uuidObject):
+                 thicknessL, TThicknessL, numberBladeDisk, projectID, externalID, typeID,uuidObject):
         self.nameOfDatabase = nameOfDatabase
         self.nameOfTable = nameOfTable
         self.ID = ID
@@ -12,6 +12,8 @@ class GenerateMeasureCommandHandlerParameter(BaseCommandHandlerParameter):
         self.TAngle = TAngle
         self.thickessT = thickessT
         self.TThicknessT = TThicknessT
+        self.thicknessL = thicknessL
+        self.TThicknessL = TThicknessL
         self.numberBladeDisk = numberBladeDisk
         self.projectID = projectID
         self.externalID = externalID
